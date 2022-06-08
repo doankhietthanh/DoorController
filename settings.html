@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <title>SHIELD</title>
+
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/logo.png">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <div class="main-wrapper">
+        <div class="header">
+            <div class="header-left">
+                <a href="index.html" class="logo"> <img src="assets/img/logo.png" width="50" height="70" alt="logo">
+                    <span class="logoclass">SHIELD</span> </a>
+                <a href="index.html" class="logo logo-small"> <img src="assets/img/logo.png" alt="Logo" width="30"
+                        height="30"> </a>
+            </div>
+
+            <a href="javascript:void(0);" id="toggle_btn">
+                <i class="fa-solid fa-align-justify" style="font-size:20px"></i>
+            </a>
+            <a class="mobile_btn" id="mobile_btn"> <i class="fas fa-bars"></i> </a>
+            <ul class="nav user-menu">
+                <li class="nav-item dropdown noti-dropdown">
+                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"><i
+                            class="fa-regular fa-bell"></i></i>
+                        <span class="badge badge-pill">1</span> </a>
+                    <div class="dropdown-menu notifications">
+                        <div class="topnav-dropdown-header"> <span class="notification-title">Thông báo</span>
+                            <a href="javascript:void(0)" class="clear-noti"> Xóa thông báo </a>
+                        </div>
+                        <div class="noti-content">
+                            <ul class="notification-list">
+                                <li class="notification-message">
+                                    <a href="#">
+                                        <div class="media"> <span class="avatar avatar-sm">
+                                                <img class="avatar-img rounded-circle" alt="User Image"
+                                                    src="assets/img/profiles/avatar-01.png">
+                                            </span>
+                                            <div class="media-body">
+                                                <p class="noti-details"><span class="noti-title">Phong</span> vừa mới
+                                                    <span class="noti-title">Đăng nhập vào hệ thống</span>
+                                                </p>
+                                                <p class="noti-time"><span class="notification-time">1 phút trước</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="topnav-dropdown-footer"> <a href="#">Xem tất cả</a> </div>
+                    </div>
+                </li>
+                <li class="nav-item dropdown has-arrow">
+                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"> <span class="user-img"><img
+                                class="rounded-circle" src="./assets/img/profiles/avatar-01.png" width="31"
+                                alt="User Image"></span> </a>
+                    <div class="dropdown-menu">
+                        <div class="user-header">
+                            <div class="avatar avatar-sm"> <img src="./assets/img/profiles/avatar-01.png"
+                                    alt="User Image" class="avatar-img rounded-circle"> </div>
+                            <div class="user-text">
+                                <h6>Thanh</h6>
+                                <p class="text-muted mb-0">Quản trị viên</p>
+                            </div>
+                        </div> <a class="dropdown-item" href="profile.html">Tài khoản</a>
+                        <a class="dropdown-item" href="settings.html">Thiết lập</a>
+                        <a class="dropdown-item" href="login.html">Đăng xuất</a>
+                    </div>
+                </li>
+            </ul>
+            <div class="top-nav-search">
+                <form>
+                    <input type="text" class="form-control" placeholder="">
+                    <button class="btn" type="submit"><i class="fas fa-search"></i></button>
+                </form>
+            </div>
+        </div>
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-inner">
+                <div id="sidebar-menu" class="sidebar-menu">
+                    <ul>
+                        <li>
+                            <a href="index.html">
+                                <i class="fas fa-tachometer-alt"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="list-divider"></li>
+                        <li class="active">
+                            <a href="settings.html">
+                                <i class="fa-solid fa-gear"></i>
+                                <span>Thiết lập</span>
+                            </a>
+                        </li>
+                        <li> <a href="activities.html"><i class="fa-regular fa-bell"></i> <span>Hoạt động</span></a>
+                        </li>
+
+                        <li>
+                            <a href="history.html">
+                                <i class="fa-solid fa-clock-rotate-left"></i>
+                                <span>Lịch sử</span>
+                            </a>
+                        </li>
+
+                        <li class="list-divider"></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="page-wrapper">
+            <div class="content mt-5">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h4 class="page-title">Thiết lập</h4>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-xl-3 col-sm-6 col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <img id="door-image" src="./assets/door/door-close.png"
+                                    style="width: 100%; height: 100%;">
+                            </div>
+                            <div class="card-footer d-flex justify-content-center align-items-center">
+                                <button type="button" class="btn btn-primary" id="door-button">Tap to open</button>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 col-12">
+                        <div class="card board1 fill" style="cursor: pointer; -webkit-text-fill-color: #1f2ad5">
+                            <a data-toggle="modal" href="#modal_add_finger">
+                                <div class="card-body">
+                                    <div class="dash-widget-header">
+                                        <div>
+                                            <h3 class="card_widget_header"></h3>
+                                            <h6 class="text-muted">Thêm vân tay</h6>
+                                        </div>
+                                        <div class="ml-auto mt-md-3 mt-lg-0"> <span class="opacity-7 text-muted">
+                                                <i class="fa-solid fa-plus" style="font-size: 24px; " width="24"
+                                                    height="24" viewbox="0 0 24 24" fill="none" stroke="#009688"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                </i>
+                                                <line x1="12" y1="1" x2="12" y2="23"></line>
+                                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                                                </svg>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+
+                        </div>
+                        <div class="card board1 fill" style="cursor: pointer; -webkit-text-fill-color: #f00045">
+                            <a data-toggle="modal" href="#modal_remove_finger">
+                                <div class="card-body">
+                                    <div class="dash-widget-header">
+                                        <div>
+                                            <h3 class="card_widget_header"></h3>
+                                            <h6 class="text-muted">Xóa vân tay</h6>
+                                        </div>
+                                        <div class="ml-auto mt-md-3 mt-lg-0"> <span class="opacity-7 text-muted">
+                                                <i class="fa-solid fa-xmark" style="font-size: 24px; " width="24"
+                                                    height="24" viewbox="0 0 24 24" fill="none" stroke="#009688"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                </i>
+                                                <line x1="12" y1="1" x2="12" y2="23"></line>
+                                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                                                </svg>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="card board1 fill" style="cursor: pointer;">
+                            <a data-toggle="modal" href="#modal_change_password">
+                                <div class="card-body">
+                                    <div class="dash-widget-header">
+                                        <div>
+                                            <h3 class="card_widget_header"></h3>
+                                            <h6 class="text-muted">Đổi mật khẩu</h6>
+                                        </div>
+                                        <div class="ml-auto mt-md-3 mt-lg-0"> <span class="opacity-7 text-muted">
+                                                <i class="fa-solid fa-retweet" style="font-size: 24px; " width="24"
+                                                    height="24" viewbox="0 0 24 24" fill="none" stroke="#009688"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                </i>
+                                                <line x1="12" y1="1" x2="12" y2="23"></line>
+                                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                                                </svg>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="card board1 fill" style="cursor: pointer; -webkit-text-fill-color: #f07700">
+                            <a data-toggle="modal" href="#modal_change_time_auto_close">
+                                <div class="card-body">
+                                    <div class="dash-widget-header">
+                                        <div>
+                                            <h3 class="card_widget_header"></h3>
+                                            <h6 class="text-muted">Đóng tự động</h6>
+                                        </div>
+                                        <div class="ml-auto mt-md-3 mt-lg-0"> <span class="opacity-7 text-muted">
+                                                <i class="fa-solid fa-stopwatch" style="font-size: 24px; " width="24"
+                                                    height="24" viewbox="0 0 24 24" fill="none" stroke="#009688"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                </i>
+                                                <line x1="12" y1="1" x2="12" y2="23"></line>
+                                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                                                </svg>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-6 col-sm-12 col-12">
+                        <div class="col-md-12 d-flex">
+                            <div class="card card-table flex-fill">
+                                <div class="card-header">
+                                    <h4 class="card-title float-left mt-2">DANH SÁCH VÂN TAY</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover table-center">
+                                            <thead>
+                                                <tr>
+                                                    <th>STT</th>
+                                                    <th>Họ và Tên</th>
+                                                    <th>Mô tả</th>
+                                                    <th class="text-center">ID</th>
+                                                    <th class="text-center">Xóa</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tbody-list-finger">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal fade" id="modal_add_finger" aria-hidden="true" role="dialog">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Thêm vân tay</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span
+                                            aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form id="form-add-finger">
+                                        <div class="row form-row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="form-label">Tên</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Nhập tên người dùng">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="form-label">Mô tả</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Nhập tên vân tay">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="form-label">ID vân tay</label>
+                                                    <input type="number" class="form-control"
+                                                        placeholder="Nhập ID vân tay muốn đăng kí" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="form-label">Mật khẩu</label>
+                                                    <input type="password" class="form-control"
+                                                        placeholder="Nhập mật khẩu mở khóa" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-block"
+                                            style="background-color: #1f2ad5; color: #fff">Thêm</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal fade" id="modal_remove_finger" aria-hidden="true" role="dialog">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Xóa vân tay</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span
+                                            aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form id="form-remove-finger">
+                                        <div class="row form-row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="form-label">ID vân tay</label>
+                                                    <input type="number" class="form-control"
+                                                        placeholder="Nhập ID vân tay muốn xóa" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="form-label">Mật khẩu</label>
+                                                    <input type="password" class="form-control"
+                                                        placeholder="Nhập mật khẩu mở khóa" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-block"
+                                            style="background-color: #f00045; color: #fff">Lưu</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal fade" id="modal_change_password" aria-hidden="true" role="dialog">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Đổi mật khẩu</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span
+                                            aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form id="form-change-password">
+                                        <div class="row form-row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="form-label">Mật khẩu cũ</label>
+                                                    <input type="password" class="form-control"
+                                                        placeholder="Nhập mật khẩu mở khóa" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="form-label">Mật khẩu mới</label>
+                                                    <input type="password" class="form-control"
+                                                        placeholder="Nhập mật khẩu mới" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="form-label">Xác nhận mật khẩu mới</label>
+                                                    <input type="password" class="form-control"
+                                                        placeholder="Xác nhận mật khẩu mới" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary btn-block">Cập nhật</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal fade" id="modal_change_time_auto_close" aria-hidden="true" role="dialog">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Đóng tự động</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span
+                                            aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form id="form-change-time-auto">
+                                        <div class="row form-row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="form-label">Mật khẩu</label>
+                                                    <input type="password" class="form-control"
+                                                        placeholder="Nhập mật khẩu mở khóa" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="form-label">Thời gian (s)</label>
+                                                    <input type="number" class="form-control" step="1000"
+                                                        placeholder="Thời gian tự động đóng cửa" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-block"
+                                            style="background-color: #f07700; color: #fff">Lưu</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="./js/lib/jquery-3.5.1.min.js"></script>
+    <script src="./js/lib/popper.min.js"></script>
+    <script src="./js/lib/bootstrap.min.js"></script>
+    <script src="./js/src/script.js"></script>
+    <script type="text/javascript" src="./js/lib/toastify.min.js"></script>
+    <script type="module" src="./js/src/firebase.js"></script>
+    <script type="module" src="./js/src/settings.js"></script>
+
+</body>
+
+</html>
