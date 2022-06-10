@@ -26,6 +26,8 @@ if (doorControl) {
       doorControl.textContent = "Tap to open";
       doorControl.style.backgroundColor = "#1890ff";
       set(ref(database, "door/"), false);
+      set(ref(database, "action/"), "close");
+      set(ref(database, "startAction/"), 0);
       ToastifyNotify(false);
       isDoor = false;
     } else {
@@ -33,6 +35,8 @@ if (doorControl) {
       doorControl.textContent = "Tap to close";
       doorControl.style.backgroundColor = "#fa541c";
       set(ref(database, "door/"), true);
+      set(ref(database, "action/"), "open");
+      set(ref(database, "startAction/"), 1);
       ToastifyNotify(true);
       isDoor = true;
     }
@@ -93,7 +97,8 @@ const ToastifyNotify = (status) => {
 
 const setAction = (action, id) => {
   set(ref(database, "action/"), action);
-  set(ref(database, "id/"), id);
+  set(ref(database, "IDtemp/"), id);
+  set(ref(database, "startAction/"), 1);
 };
 
 const addFinger = (name, description, id) => {
@@ -133,10 +138,10 @@ const addFinger = (name, description, id) => {
         window.location.reload(true);
       },
     }).showToast();
-    setTimeout(() => {
-      setAction("", 0);
-      // console.log(LIST_FINGER_ID);
-    }, 5000);
+    // setTimeout(() => {
+    //   setAction("", 0);
+    //   // console.log(LIST_FINGER_ID);
+    // }, 5000);
   }
 };
 
@@ -178,6 +183,8 @@ const removeFinger = (id) => {
 
 const changePasswordDoor = (password) => {
   set(ref(database, "password/"), password);
+  set(ref(database, "action/"), "pass");
+  set(ref(database, "startAction/"), 1);
   Toastify({
     text: "Đổi mật khẩu thành công",
     duration: 3000,
@@ -196,6 +203,7 @@ const changePasswordDoor = (password) => {
 
 const changeTimeAuto = (time) => {
   set(ref(database, "auto/"), time);
+  set(ref(database, "startAction/"), 1);
   Toastify({
     text: "Đổi thời gian thành công",
     duration: 3000,
@@ -217,7 +225,7 @@ document.getElementById("form-add-finger").addEventListener("submit", (e) => {
 
   get(child(ref(database), "password")).then((snapshot) => {
     const password = snapshot.val();
-    if (e.target[3].value == password) {
+    if (e.target[3].value === password) {
       addFinger(e.target[0].value, e.target[1].value, e.target[2].value);
     } else {
       Toastify({
@@ -241,7 +249,7 @@ document
     e.preventDefault();
     get(child(ref(database), "password")).then((snapshot) => {
       const password = snapshot.val();
-      if (e.target[3].value == password) {
+      if (e.target[1].value === password) {
         removeFinger(e.target[0].value);
       } else {
         Toastify({
@@ -266,7 +274,7 @@ document
 
     get(child(ref(database), "password")).then((snapshot) => {
       const password = snapshot.val();
-      if (e.target[0].value != password) {
+      if (e.target[0].value !== password) {
         Toastify({
           text: "Mật khẩu không đúng",
           duration: 3000,
@@ -292,7 +300,7 @@ document
             },
           }).showToast();
         } else {
-          changePasswordDoor(Number(e.target[1].value));
+          changePasswordDoor(e.target[1].value);
         }
       }
     });
@@ -304,8 +312,9 @@ document
     e.preventDefault();
     get(child(ref(database), "password")).then((snapshot) => {
       const password = snapshot.val();
-      if (e.target[0].value == password) {
+      if (e.target[0].value === password) {
         changeTimeAuto(Number(e.target[1].value));
+        set(ref(database, "action/"), "timeAuto");
       } else {
         Toastify({
           text: "Mật khẩu không đúng",
