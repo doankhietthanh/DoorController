@@ -151,23 +151,19 @@ const addFinger = (name, description, id) => {
     });
     setAction("enroll", Number(id));
     Toastify({
-      text: "Thêm vân tay thành công",
+      text: "Đang thêm vân tay",
       duration: 3000,
       close: true,
       gravity: "top",
       position: "center",
       stopOnFocus: true,
       style: {
-        background: "#1890ff",
+        background: "#f07700",
       },
       onClick: () => {
         window.location.reload(true);
       },
     }).showToast();
-    // setTimeout(() => {
-    //   setAction("", 0);
-    //   // console.log(LIST_FINGER_ID);
-    // }, 5000);
   }
 };
 
@@ -176,14 +172,14 @@ const removeFinger = (id) => {
     remove(ref(database, "finger/" + id));
     setAction("delete", Number(id));
     Toastify({
-      text: "Xóa vân tay thành công",
+      text: "Đang xóa vân tay",
       duration: 3000,
       close: true,
       gravity: "top",
       position: "center",
       stopOnFocus: true,
       style: {
-        background: "#1890ff",
+        background: "#f07700",
       },
       onClick: () => {
         window.location.reload(true);
@@ -191,7 +187,7 @@ const removeFinger = (id) => {
     }).showToast();
   } else {
     Toastify({
-      text: "Xóa vân tay thất bại",
+      text: "Không tìm thấy vân tay",
       duration: 3000,
       close: true,
       gravity: "top",
@@ -212,14 +208,14 @@ const changePasswordDoor = (password) => {
   set(ref(database, "action/"), "pass");
   set(ref(database, "startAction/"), 1);
   Toastify({
-    text: "Đổi mật khẩu thành công",
+    text: "Đang đổi mật khẩu",
     duration: 3000,
     close: true,
     gravity: "top",
     position: "center",
     stopOnFocus: true,
     style: {
-      background: "#1890ff",
+      background: "#f07700",
     },
     onClick: () => {
       window.location.reload(true);
@@ -231,14 +227,14 @@ const changeTimeAuto = (time) => {
   set(ref(database, "auto/"), time);
   set(ref(database, "startAction/"), 1);
   Toastify({
-    text: "Đổi thời gian thành công",
+    text: "Đang đổi thời gian",
     duration: 3000,
     close: true,
     gravity: "top",
     position: "center",
     stopOnFocus: true,
     style: {
-      background: "#1890ff",
+      background: "#f07700",
     },
     onClick: () => {
       window.location.reload(true);
@@ -341,6 +337,7 @@ document
       if (e.target[0].value === password) {
         changeTimeAuto(Number(e.target[1].value));
         set(ref(database, "action/"), "timeAuto");
+        successAction("timeAuto");
       } else {
         Toastify({
           text: "Mật khẩu không đúng",
@@ -356,3 +353,29 @@ document
       }
     });
   });
+
+const successAction = (action) => {
+  onValue(ref(database, "successAction/" + action), (snapshot) => {
+    const message = snapshot.val();
+    console.log(message);
+    if (message === 1) {
+      Toastify({
+        text: "Thành công",
+        duration: 5000,
+        close: true,
+        gravity: "top",
+        position: "center",
+        stopOnFocus: true,
+        style: {
+          background: "#1890ff",
+        },
+        onClick: () => {
+          window.location.reload(true);
+        },
+      }).showToast();
+    }
+  });
+  setTimeout(() => {
+    set(ref(database, "successAction/" + action), 0);
+  }, 2000);
+};

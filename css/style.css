@@ -2187,7 +2187,7 @@ html.menu-opened body {
 .noti-time {
     margin: 0;
 }
-.user-menu.nav > li > a > i.fe.fe-bell {
+.user-menu.nav > li > a > i.fa-regular.fa-bell {
     -webkit-animation-duration: 1.5s;
     animation-duration: 1.5s;
     -webkit-animation-fill-mode: both;
