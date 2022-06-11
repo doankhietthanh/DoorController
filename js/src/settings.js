@@ -49,20 +49,45 @@ onValue(ref(database, "finger/"), (snapshot) => {
   const listID = Object.keys(data);
   LIST_FINGER_ID.push(...listID);
 
+  document.getElementById("tbody-list-finger").innerHTML = "";
+
   listID.forEach((id, index) => {
     onValue(ref(database, `finger/${id}`), (snap) => {
       const doc = snap.val();
-      document.getElementById("tbody-list-finger").innerHTML += `
-          <tr>
-            <td class="text-nowrap">
-                <div>${index + 1}</div>
-            </td>
-            <td class="text-nowrap">${doc.name}</td>
-            <td class="text-nowrap">${doc.description}</td>
-            <td class="text-center"><span class="badge badge-pill bg-success inv-badge">${id}</span></td>
-            <td class="text-center">❌</td>
-          </tr>
-        `;
+
+      const trElement = document.createElement("tr");
+      const tdIndexElement = document.createElement("td");
+      const tdNameElement = document.createElement("td");
+      const tdDescriptionElement = document.createElement("td");
+      const tdIDElement = document.createElement("td");
+      const tdDeleteElement = document.createElement("td");
+      const spanDeleteElement = document.createElement("span");
+
+      document.getElementById("tbody-list-finger").appendChild(trElement);
+      trElement.appendChild(tdIndexElement);
+      trElement.appendChild(tdNameElement);
+      trElement.appendChild(tdDescriptionElement);
+      trElement.appendChild(tdIDElement);
+      trElement.appendChild(tdDeleteElement);
+      tdDeleteElement.appendChild(spanDeleteElement);
+
+      tdIndexElement.className = "text-nowrap";
+      tdNameElement.className = "text-nowrap";
+      tdDescriptionElement.className = "text-nowrap";
+      tdIDElement.className = "text-center";
+      tdDeleteElement.className = "text-center";
+      tdDeleteElement.style = "cursor: pointer";
+
+      tdIndexElement.textContent = index + 1;
+      tdNameElement.textContent = doc.name;
+      tdDescriptionElement.textContent = doc.description;
+      tdIDElement.textContent = id;
+      spanDeleteElement.textContent = "❌";
+
+      tdDeleteElement.addEventListener("click", () => {
+        removeFinger(id);
+        trElement.remove();
+      });
     });
   });
 });
@@ -119,6 +144,7 @@ const addFinger = (name, description, id) => {
     }).showToast();
   } else {
     set(ref(database, "finger/" + id), {
+      id: id,
       name: name,
       description: description,
       status: false,
