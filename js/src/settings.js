@@ -11,6 +11,9 @@ import { auth, database } from "./firebase.js";
 let LIST_FINGER_ID = [];
 let TIME_CLOSE;
 
+const loading = document.querySelector(".loading");
+loading.style.display = "none";
+
 onValue(ref(database, "auto/"), (snapshot) => {
   TIME_CLOSE = snapshot.val();
 });
@@ -19,30 +22,46 @@ const doorControl = document.getElementById("door-button");
 const doorImage = document.getElementById("door-image");
 
 let isDoor = false;
-if (doorControl) {
-  doorControl.addEventListener("click", () => {
-    if (isDoor) {
-      doorImage.src = "./assets/door/door-close.png";
-      doorControl.textContent = "Tap to open";
-      doorControl.style.backgroundColor = "#1890ff";
-      set(ref(database, "door/"), false);
-      set(ref(database, "action/"), "close");
-      set(ref(database, "startAction/"), 0);
-      ToastifyNotify(false);
-      isDoor = false;
-    } else {
-      doorImage.src = "./assets/door/door-open.png";
-      doorControl.textContent = "Tap to close";
-      doorControl.style.backgroundColor = "#fa541c";
-      set(ref(database, "door/"), true);
-      set(ref(database, "action/"), "open");
-      set(ref(database, "startAction/"), 1);
-      ToastifyNotify(true);
-      isDoor = true;
-    }
+
+onValue(ref(database, "door/"), (snapshot) => {
+  const status = snapshot.val();
+  if (status) {
+    doorImage.src = "./assets/door/door-open.png";
+    doorControl.textContent = "Tap to close";
+    doorControl.style.backgroundColor = "#1890ff";
+    isDoor = true;
+  } else {
+    doorImage.src = "./assets/door/door-close.png";
+    doorControl.textContent = "Tap to open";
+    doorControl.style.backgroundColor = "#1890ff";
+    isDoor = false;
+  }
+});
+
+doorControl.addEventListener("click", () => {
+  if (isDoor) {
+    doorImage.src = "./assets/door/door-close.png";
+    doorControl.textContent = "Tap to open";
+    doorControl.style.backgroundColor = "#1890ff";
+    set(ref(database, "door/"), false);
+    set(ref(database, "action/"), "close");
+    set(ref(database, "startAction/"), 1);
+    ToastifyNotify(false);
+    isDoor = false;
+  } else {
+    doorImage.src = "./assets/door/door-open.png";
+    doorControl.textContent = "Tap to close";
+    doorControl.style.backgroundColor = "#fa541c";
+    set(ref(database, "door/"), true);
+    set(ref(database, "action/"), "open");
+    set(ref(database, "startAction/"), 1);
+    ToastifyNotify(true);
+    isDoor = true;
+  }
+  if (TIME_CLOSE !== 0) {
     autoCloseDoor();
-  });
-}
+  }
+});
 
 onValue(ref(database, "finger/"), (snapshot) => {
   const data = snapshot.val();
@@ -86,6 +105,7 @@ onValue(ref(database, "finger/"), (snapshot) => {
 
       tdDeleteElement.addEventListener("click", () => {
         removeFinger(id);
+        successAction("delete");
         trElement.remove();
       });
     });
@@ -249,6 +269,7 @@ document.getElementById("form-add-finger").addEventListener("submit", (e) => {
     const password = snapshot.val();
     if (e.target[3].value === password) {
       addFinger(e.target[0].value, e.target[1].value, e.target[2].value);
+      successAction("enroll");
     } else {
       Toastify({
         text: "Mật khẩu không đúng",
@@ -273,6 +294,7 @@ document
       const password = snapshot.val();
       if (e.target[1].value === password) {
         removeFinger(e.target[0].value);
+        successAction("delete");
       } else {
         Toastify({
           text: "Mật khẩu không đúng",
@@ -323,6 +345,7 @@ document
           }).showToast();
         } else {
           changePasswordDoor(e.target[1].value);
+          successAction("pass");
         }
       }
     });
@@ -336,7 +359,7 @@ document
       const password = snapshot.val();
       if (e.target[0].value === password) {
         changeTimeAuto(Number(e.target[1].value));
-        set(ref(database, "action/"), "timeAuto");
+        set(ref(database, "action/"), "time");
         successAction("timeAuto");
       } else {
         Toastify({
@@ -354,28 +377,37 @@ document
     });
   });
 
+let isActionSuccess;
 const successAction = (action) => {
-  onValue(ref(database, "successAction/" + action), (snapshot) => {
+  onValue(ref(database, "successAction"), (snapshot) => {
     const message = snapshot.val();
-    console.log(message);
     if (message === 1) {
-      Toastify({
-        text: "Thành công",
-        duration: 5000,
-        close: true,
-        gravity: "top",
-        position: "center",
-        stopOnFocus: true,
-        style: {
-          background: "#1890ff",
-        },
-        onClick: () => {
-          window.location.reload(true);
-        },
-      }).showToast();
+      document.getElementById("modal_" + action).classList.remove("show");
+      document.getElementById("modal_" + action).removeAttribute("style");
+      document.body.classList.remove("modal-open");
+      if (document.querySelector(".modal-backdrop.fade.show")) {
+        document.querySelector(".modal-backdrop.fade.show").remove();
+      }
+      document.body.style = "";
+
+      loading.style.display = "flex";
+      isActionSuccess = true;
+    } else {
+      loading.style.display = "none";
+      if (isActionSuccess) {
+        Toastify({
+          text: "Thành công",
+          duration: 3000,
+          close: true,
+          gravity: "top",
+          position: "center",
+          stopOnFocus: true,
+          style: {
+            background: "#00c853",
+          },
+        }).showToast();
+      }
+      isActionSuccess = false;
     }
   });
-  setTimeout(() => {
-    set(ref(database, "successAction/" + action), 0);
-  }, 2000);
 };

@@ -16,6 +16,13 @@
 </head>
 
 <body>
+    <div class="loading">
+        <div class="lds-facebook">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
     <div class="main-wrapper">
         <div class="header">
             <div class="header-left">
@@ -97,12 +104,21 @@
                             </a>
                         </li>
                         <li class="list-divider"></li>
+
                         <li class="active">
                             <a href="settings.html">
                                 <i class="fa-solid fa-gear"></i>
                                 <span>Thiết lập</span>
                             </a>
                         </li>
+
+                        <li>
+                            <a href="wifi-connect.html">
+                                <i class="fa-solid fa-wifi"></i>
+                                <span>Wifi</span>
+                            </a>
+                        </li>
+
                         <li> <a href="activities.html"><i class="fa-regular fa-bell"></i> <span>Hoạt động</span></a>
                         </li>
 
@@ -140,7 +156,7 @@
                     </div>
                     <div class="col-xl-3 col-sm-6 col-12">
                         <div class="card board1 fill" style="cursor: pointer; -webkit-text-fill-color: #1f2ad5">
-                            <a data-toggle="modal" href="#modal_add_finger">
+                            <a data-toggle="modal" href="#modal_enroll">
                                 <div class="card-body">
                                     <div class="dash-widget-header">
                                         <div>
@@ -163,7 +179,7 @@
 
                         </div>
                         <div class="card board1 fill" style="cursor: pointer; -webkit-text-fill-color: #f00045">
-                            <a data-toggle="modal" href="#modal_remove_finger">
+                            <a data-toggle="modal" href="#modal_delete">
                                 <div class="card-body">
                                     <div class="dash-widget-header">
                                         <div>
@@ -185,7 +201,7 @@
                             </a>
                         </div>
                         <div class="card board1 fill" style="cursor: pointer;">
-                            <a data-toggle="modal" href="#modal_change_password">
+                            <a data-toggle="modal" href="#modal_pass">
                                 <div class="card-body">
                                     <div class="dash-widget-header">
                                         <div>
@@ -207,7 +223,7 @@
                             </a>
                         </div>
                         <div class="card board1 fill" style="cursor: pointer; -webkit-text-fill-color: #f07700">
-                            <a data-toggle="modal" href="#modal_change_time_auto_close">
+                            <a data-toggle="modal" href="#modal_timeAuto">
                                 <div class="card-body">
                                     <div class="dash-widget-header">
                                         <div>
@@ -257,7 +273,7 @@
                         </div>
                     </div>
 
-                    <div class="modal fade" id="modal_add_finger" aria-hidden="true" role="dialog">
+                    <div class="modal fade" id="modal_enroll" aria-hidden="true" role="dialog">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -306,7 +322,7 @@
                         </div>
                     </div>
 
-                    <div class="modal fade" id="modal_remove_finger" aria-hidden="true" role="dialog">
+                    <div class="modal fade" id="modal_delete" aria-hidden="true" role="dialog">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -341,7 +357,7 @@
                         </div>
                     </div>
 
-                    <div class="modal fade" id="modal_change_password" aria-hidden="true" role="dialog">
+                    <div class="modal fade" id="modal_pass" aria-hidden="true" role="dialog">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -382,7 +398,7 @@
                         </div>
                     </div>
 
-                    <div class="modal fade" id="modal_change_time_auto_close" aria-hidden="true" role="dialog">
+                    <div class="modal fade" id="modal_timeAuto" aria-hidden="true" role="dialog">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
