@@ -5701,3 +5701,98 @@ h3.page-sub-title {
     border-radius: 50%;
     background-color: #00c5fb;
 }
+
+/*  */
+.form-group.invalid .form-message {
+    color: #f33a58;
+}
+
+.form-message {
+    font-size: 12px;
+    line-height: 1.3rem;
+    padding: 4px 0 0;
+    margin-left: 5px;
+    color: #f33a58;
+}
+
+/* Locking */
+.locking {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.3);
+
+    z-index: 10000;
+}
+
+.locking .col-md-12 {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.locking form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.locking form .row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.locking-icon {
+    width: 50px;
+    height: 50px;
+    background-color: #fff;
+    border-radius: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+}
+
+.locking-content,
+.locking-note {
+    width: 100%;
+    font-size: 18px;
+    text-align: center;
+    color: #fff;
+}
+#send-again-otp {
+    color: #fdfbfb;
+}
+
+.locking-otp {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.locking-otp input {
+    width: 160px;
+    text-align: center;
+}
+
+.btn-unlock {
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

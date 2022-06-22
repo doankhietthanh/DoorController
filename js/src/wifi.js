@@ -6,10 +6,12 @@ import {
   child,
 } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js";
 import { auth, database } from "./firebase.js";
-import { init, logOut } from "./init.js";
+import { init, logOut, statusHardware, lockSystem } from "./init.js";
 
 init();
 logOut();
+statusHardware();
+lockSystem();
 
 const loading = document.querySelector(".loading");
 loading.style.display = "none";

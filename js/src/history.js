@@ -4,10 +4,11 @@ import {
   set,
 } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js";
 import { auth, database } from "./firebase.js";
-import { init, logOut } from "./init.js";
+import { init, logOut, lockSystem } from "./init.js";
 
 init();
 logOut();
+lockSystem();
 
 let listFingerID = [];
 

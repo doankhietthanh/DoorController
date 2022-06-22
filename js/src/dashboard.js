@@ -10,25 +10,12 @@ import { auth, database } from "./firebase.js";
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 
-import { init, logOut } from "./init.js";
+import { init, logOut, statusHardware, lockSystem } from "./init.js";
+
 init();
 logOut();
-
-// onAuthStateChanged(auth, (user) => {
-//   if (user) {
-//     const uid = user.uid;
-
-//     get(child(ref(database), `users/${uid}`)).then((snapshot) => {
-//       if (snapshot.exists()) {
-//         const data = snapshot.val();
-//         setUserDetail(data.address, data.phone, data.birthday);
-//       }
-//     });
-//     // .catch((error) => {
-//     //   console.error(error);
-//     // });
-//   }
-// });
+statusHardware();
+lockSystem();
 
 onValue(ref(database, "finger/"), (snapshot) => {
   const data = snapshot.val();

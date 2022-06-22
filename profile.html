@@ -19,6 +19,29 @@
 </head>
 
 <body>
+	<div class="locking">
+		<form id="form-unlock">
+			<div class="row form-row">
+				<div class="col-md-12 text-center">
+					<div class="locking-icon">🔒</div>
+				</div>
+				<div class="col-md-12 text-center">
+					<div class="locking-content">Hệ thống của bạn đang bị khóa</div>
+				</div>
+				<div class="col-md-12 text-center">
+					<div class="locking-note">Vui lòng nhập mã OTP để mở khóa</div>
+				</div>
+				<div class="col-md-12 text-center">
+					<div class="form-group locking-otp">
+						<input type="number" class="form-control" required>
+					</div>
+					<a id="send-again-otp" href="#">Gửi lại OTP</a>
+				</div>
+			</div>
+			<button type="submit" class="btn btn-block btn-unlock" style="background-color: #f00045; color: #fff">Xác
+				nhận</button>
+		</form>
+	</div>
 	<div class="loading">
 		<div class="lds-facebook">
 			<div></div>

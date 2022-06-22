@@ -10,7 +10,7 @@ import {
   updatePassword,
 } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
 import { Validator } from "../lib/validator.js";
-import { init, logOut } from "./init.js";
+import { init, logOut, lockSystem } from "./init.js";
 import { auth, database } from "./firebase.js";
 
 const $ = document.querySelector.bind(document);
@@ -21,6 +21,7 @@ let password;
 
 init();
 logOut();
+lockSystem();
 
 onAuthStateChanged(auth, (user) => {
   if (user) {
