@@ -9,7 +9,8 @@
 	<link rel="shortcut icon" type="image/x-icon" href="assets/img/logo.png">
 	<link rel="stylesheet" href="./css/bootstrap.min.css">
 	<link rel="stylesheet" href="./css/style.css">
-	<link rel="stylesheet" href="./css/lib.min.css">
+	<link rel="stylesheet" href="./css/toastify.min.css">
+	<link rel="stylesheet" href="./css/bootstrap-datetimepicker.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
 		integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
 		crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -18,6 +19,13 @@
 </head>
 
 <body>
+	<div class="loading">
+		<div class="lds-facebook">
+			<div></div>
+			<div></div>
+			<div></div>
+		</div>
+	</div>
 	<div class="main-wrapper">
 		<div class="header">
 			<div class="header-left">
@@ -26,13 +34,16 @@
 				<a href="index.html" class="logo logo-small"> <img src="assets/img/logo.png" alt="Logo" width="30"
 						height="30"> </a>
 			</div>
-			<a href="javascript:void(0);" id="toggle_btn"> <i class="fa-solid fa-align-justify"
-					style="font-size:20px"></i> </a>
+
+			<a href="javascript:void(0);" id="toggle_btn">
+				<i class="fa-solid fa-align-justify" style="font-size:20px"></i>
+			</a>
 			<a class="mobile_btn" id="mobile_btn"> <i class="fas fa-bars"></i> </a>
 			<ul class="nav user-menu">
 				<li class="nav-item dropdown noti-dropdown">
 					<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
 						<i class="fa-regular fa-bell"></i>
+
 						<span class="badge badge-pill">1</span> </a>
 					<div class="dropdown-menu notifications">
 						<div class="topnav-dropdown-header"> <span class="notification-title">Thông báo</span>
@@ -43,11 +54,12 @@
 								<li class="notification-message">
 									<a href="#">
 										<div class="media"> <span class="avatar avatar-sm">
-												<img class="avatar-img rounded-circle" alt="User Image"
-													src="assets/img/profiles/avatar-01.png">
+												<img class="avatar-img rounded-circle avatarURL" alt="User Image"
+													src="">
 											</span>
 											<div class="media-body">
-												<p class="noti-details"><span class="noti-title">Phong</span> vừa mới
+												<p class="noti-details"><span class="noti-title pfname"></span>
+													vừa mới
 													<span class="noti-title">Đăng nhập vào hệ thống</span>
 												</p>
 												<p class="noti-time"><span class="notification-time">1 phút trước</span>
@@ -63,19 +75,18 @@
 				</li>
 				<li class="nav-item dropdown has-arrow">
 					<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"> <span class="user-img"><img
-								class="rounded-circle" src="assets/img/profiles/avatar-01.png" width="31"
-								alt="Soeng Souy"></span> </a>
+								class="rounded-circle avatarURL" src="./" width="31" alt="User Image"></span> </a>
 					<div class="dropdown-menu">
 						<div class="user-header">
-							<div class="avatar avatar-sm"> <img src="assets/img/profiles/avatar-01.png" alt="User Image"
-									class="avatar-img rounded-circle"> </div>
+							<div class="avatar avatar-sm"> <img src="./" alt="User Image"
+									class="avatar-img rounded-circle avatarURL"> </div>
 							<div class="user-text">
-								<h6>Phong</h6>
-								<p class="text-muted mb-0">Quản trị viên</p>
+								<h6 class="pfname"></h6>
+								<p class="text-muted mb-0">Thành viên</p>
 							</div>
 						</div> <a class="dropdown-item" href="profile.html">Tài khoản</a>
 						<a class="dropdown-item" href="settings.html">Thiết lập</a>
-						<a class="dropdown-item" href="login.html">Đăng xuất</a>
+						<a id="logout" class="dropdown-item">Đăng xuất</a>
 					</div>
 				</li>
 			</ul>
@@ -142,21 +153,25 @@
 						<div class="profile-header">
 							<div class="row align-items-center">
 								<div class="col-auto profile-image">
-									<a href="#"> <img class="rounded-circle" alt="User Image"
-											src="assets/img/profiles/avatar-01.png"> </a>
+									<a href="#"> <img id="user-avatar" class="rounded-circle avatarURL" alt="User Image"
+											src=""> </a>
 								</div>
 								<div class="col ml-md-n2 profile-user-info">
-									<h4 class="user-name mb-3">Phong Phạm</h4>
-									<h6 class="text-muted mt-1">Quản lý</h6>
-									<div class="user-Location mt-1"><i class="fas fa-map-marker-alt"></i> HCM, Việt Nam
+									<h4 id="user-name" class="user-name mb-3 pfname"></h4>
+									<h6 class="text-muted mt-1">Thành viên</h6>
+									<div class="user-Location mt-1">
+										<i class="fas fa-map-marker-alt"></i>
+										<span id="user-address">
+											HCM, Việt Nam
+										</span>
 									</div>
-									<div class="about-text">Trying to do better</div>
+									<div class="about-text"></div>
 								</div>
-								<div class="col-auto profile-btn"> <a href="" class="btn btn-primary">
+								<div class="col-auto profile-btn">
+									<a href="" class="btn btn-primary">
 										Tin nhắn
-									</a> <a href="edit-profile.html" class="btn btn-primary">
-										Chỉnh sửa
-									</a> </div>
+									</a>
+								</div>
 							</div>
 						</div>
 						<div class="profile-menu">
@@ -181,24 +196,24 @@
 												</h5>
 												<div class="row mt-5">
 													<p class="col-sm-3 text-sm-right mb-0 mb-sm-3">Họ và tên</p>
-													<p class="col-sm-9">Phạm Duy Phong</p>
+													<p class="col-sm-9 pfname"></p>
 												</div>
 												<div class="row">
 													<p class="col-sm-3 text-sm-right mb-0 mb-sm-3">Ngày sinh</p>
-													<p class="col-sm-9">31/12/2000</p>
+													<p class="col-sm-9 pfbirthday"></p>
 												</div>
 												<div class="row">
 													<p class="col-sm-3 text-sm-right mb-0 mb-sm-3">Email</p>
-													<p class="col-sm-9">phongsakai@gmail.com</p>
+													<p class="col-sm-9 pfemail"></p>
 												</div>
 												<div class="row">
 													<p class="col-sm-3 text-sm-right mb-0 mb-sm-3">Số điện thoại</p>
-													<p class="col-sm-9">0856009953</p>
+													<p class="col-sm-9 pfphone"></p>
 												</div>
 												<div class="row">
 													<p class="col-sm-3 text-sm-right mb-0">Địa chỉ</p>
-													<p class="col-sm-9 mb-0">Hiệp Bình Chánh,
-														<br> Thủ Đức, HCM, Việt Nam.
+													<p class="col-sm-9 mb-0 pfaddress">
+														<br>
 													</p>
 												</div>
 											</div>
@@ -214,43 +229,50 @@
 														</button>
 													</div>
 													<div class="modal-body">
-														<form>
+														<form id="form-change-details">
 															<div class="row form-row">
-																<div class="col-12 col-sm-6">
-																	<div class="form-group">
-																		<label>Họ</label>
-																		<input type="text" class="form-control"
-																			value="Phạm">
-																	</div>
-																</div>
-																<div class="col-12 col-sm-6">
-																	<div class="form-group">
-																		<label>Tên</label>
-																		<input type="text" class="form-control"
-																			value="Duy Phong">
-																	</div>
-																</div>
 																<div class="col-12">
+																	<div class="form-group">
+																		<label>Họ và Tên (không dấu)</label>
+																		<input type="text" class="form-control"
+																			name="name" id="change-username">
+																		<span class="form-message"></span>
+																	</div>
+																</div>
+																<div class="col-12 col-sm-6">
 																	<div class="form-group">
 																		<label>Ngày sinh</label>
 																		<div class="cal-icon">
-																			<input type="text" class="form-control"
-																				value="31-12-2000">
+																			<input type="text"
+																				class="form-control datetimepicker"
+																				placeholder="VD: 01/01/2001"
+																				name="birthday" id="change-birthday">
+																			<span class="form-message"></span>
 																		</div>
+																	</div>
+																</div>
+																<div class="col-12 col-sm-6">
+																	<div class="form-group">
+																		<label>Ảnh đại diện (URL)</label>
+																		<input type="text" class="form-control"
+																			name="avatar" id="change-avatar">
+																		<span class="form-message"></span>
 																	</div>
 																</div>
 																<div class="col-12 col-sm-6">
 																	<div class="form-group">
 																		<label>Email</label>
 																		<input type="email" class="form-control"
-																			value="phongsakai@gmail.com">
+																			name="email" id="change-email" disabled>
+																		<span class="form-message"></span>
 																	</div>
 																</div>
 																<div class="col-12 col-sm-6">
 																	<div class="form-group">
 																		<label>Số điện thoại</label>
-																		<input type="text" value="+84 85 600 9953"
-																			class="form-control">
+																		<input type="text" class="form-control"
+																			name="phone" id="change-phone">
+																		<span class="form-message"></span>
 																	</div>
 																</div>
 																<div class="col-12">
@@ -260,28 +282,8 @@
 																	<div class="form-group">
 																		<label>Địa chỉ</label>
 																		<input type="text" class="form-control"
-																			value="Hiệp Bình Chánh">
-																	</div>
-																</div>
-																<div class="col-12 col-sm-6">
-																	<div class="form-group">
-																		<label>Quận/Huyện</label>
-																		<input type="text" class="form-control"
-																			value="Thủ Đức">
-																	</div>
-																</div>
-																<div class="col-12 col-sm-6">
-																	<div class="form-group">
-																		<label>Tỉnh/Thành phố</label>
-																		<input type="text" class="form-control"
-																			value="Florida">
-																	</div>
-																</div>
-																<div class="col-12 col-sm-6">
-																	<div class="form-group">
-																		<label>Quốc tịch</label>
-																		<input type="text" class="form-control"
-																			value="United States">
+																			name="address" id="change-address">
+																		<span class="form-message"></span>
 																	</div>
 																</div>
 															</div>
@@ -301,18 +303,24 @@
 										<h5 class="card-title">Thay đổi mật khẩu</h5>
 										<div class="row">
 											<div class="col-md-10 col-lg-6">
-												<form>
+												<form id="form-change-password">
 													<div class="form-group">
 														<label>Mật khẩu cũ</label>
-														<input type="password" class="form-control">
+														<input type="password" class="form-control" name="old_password"
+															id="old_password">
+														<span class="form-message"></span>
 													</div>
 													<div class="form-group">
 														<label>Mật khẩu mới</label>
-														<input type="password" class="form-control">
+														<input type="password" class="form-control" name="new_password"
+															id="new_password">
+														<span class="form-message"></span>
 													</div>
 													<div class="form-group">
 														<label>Xác nhận Mật khẩu mới</label>
-														<input type="password" class="form-control">
+														<input type="password" class="form-control"
+															name="new_password_confirmed" id="new_password_confirmed">
+														<span class="form-message"></span>
 													</div>
 													<button class="btn btn-primary" type="submit">Lưu thay đổi</button>
 												</form>
@@ -331,7 +339,21 @@
 	<script src="./js/lib/jquery-3.5.1.min.js"></script>
 	<script src="./js/lib/popper.min.js"></script>
 	<script src="./js/lib/bootstrap.min.js"></script>
+	<script src="./js/lib/moment.min.js"></script>
+	<script src="./js/lib/bootstrap-datetimepicker.min.js"></script>
 	<script src="./js/src/script.js"></script>
+	<script type="text/javascript" src="./js/lib/toastify.min.js"></script>
+	<script type="module" src="./js/src/firebase.js"></script>
+	<script type="module" src="./js/src/profile.js"></script>
+
+	<script>
+		$(function () {
+			$('#datetimepicker3').datetimepicker({
+				format: 'LT'
+
+			});
+		});
+	</script>
 </body>
 
 </html>

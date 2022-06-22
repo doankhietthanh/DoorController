@@ -7,9 +7,9 @@
     <title>SHIELD</title>
 
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/logo.png">
+    <link rel="stylesheet" type="text/css" href="./css/toastify.min.css">
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./css/lib.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
         integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -18,6 +18,13 @@
 </head>
 
 <body>
+    <div class="loading">
+        <div class="lds-facebook">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
     <div class="main-wrapper">
         <div class="header">
             <div class="header-left">
@@ -46,11 +53,12 @@
                                 <li class="notification-message">
                                     <a href="#">
                                         <div class="media"> <span class="avatar avatar-sm">
-                                                <img class="avatar-img rounded-circle" alt="User Image"
-                                                    src="assets/img/profiles/avatar-01.png">
+                                                <img class="avatar-img rounded-circle avatarURL" alt="User Image"
+                                                    src="">
                                             </span>
                                             <div class="media-body">
-                                                <p class="noti-details"><span class="noti-title">Phong</span> vừa mới
+                                                <p class="noti-details"><span class="noti-title pfname"></span>
+                                                    vừa mới
                                                     <span class="noti-title">Đăng nhập vào hệ thống</span>
                                                 </p>
                                                 <p class="noti-time"><span class="notification-time">1 phút trước</span>
@@ -66,19 +74,18 @@
                 </li>
                 <li class="nav-item dropdown has-arrow">
                     <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"> <span class="user-img"><img
-                                class="rounded-circle" src="./assets/img/profiles/avatar-01.png" width="31"
-                                alt="User Image"></span> </a>
+                                class="rounded-circle avatarURL" src="./" width="31" alt="User Image"></span> </a>
                     <div class="dropdown-menu">
                         <div class="user-header">
-                            <div class="avatar avatar-sm"> <img src="./assets/img/profiles/avatar-01.png"
-                                    alt="User Image" class="avatar-img rounded-circle"> </div>
+                            <div class="avatar avatar-sm"> <img src="./" alt="User Image"
+                                    class="avatar-img rounded-circle avatarURL"> </div>
                             <div class="user-text">
-                                <h6>Thanh</h6>
-                                <p class="text-muted mb-0">Quản trị viên</p>
+                                <h6 class="pfname"></h6>
+                                <p class="text-muted mb-0">Thành viên</p>
                             </div>
                         </div> <a class="dropdown-item" href="profile.html">Tài khoản</a>
                         <a class="dropdown-item" href="settings.html">Thiết lập</a>
-                        <a class="dropdown-item" href="login.html">Đăng xuất</a>
+                        <a id="logout" class="dropdown-item">Đăng xuất</a>
                     </div>
                 </li>
             </ul>
@@ -143,22 +150,153 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="row">
-                    <div class="col-xl-3 col-sm-6 col-12">
+                    <div class="col-xl-4 col-sm-12 col-12">
+                        <div class="row">
+                            <div class="col-xl-12 col-sm-8 col-12">
+                                <div class="card board1 fill" style="cursor: pointer; -webkit-text-fill-color: #1f2ad5">
+                                    <a data-toggle="modal" href="#modal_add_wifi">
+                                        <div class="card-body">
+                                            <div class="dash-widget-header">
+                                                <div>
+                                                    <h3 class="card_widget_header"></h3>
+                                                    <h6 class="text-muted">Thêm WIFI</h6>
+                                                </div>
+                                                <div class="ml-auto mt-md-3 mt-lg-0"> <span
+                                                        class="opacity-7 text-muted">
+                                                        <i class="fa-solid fa-plus" style="font-size: 24px; " width="24"
+                                                            height="24" viewbox="0 0 24 24" fill="none" stroke="#009688"
+                                                            stroke-width="2" stroke-linecap="round"
+                                                            stroke-linejoin="round">
+                                                        </i>
+                                                        <line x1="12" y1="1" x2="12" y2="23"></line>
+                                                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6">
+                                                        </path>
+                                                        </svg>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-12 col-sm-8 col-12">
+                                <div class="card board1 fill" style="cursor: pointer; -webkit-text-fill-color: #f07700">
+
+                                    <div class="card-body" id="btn-change-wifi">
+                                        <div class="dash-widget-header">
+                                            <div>
+                                                <h3 class="card_widget_header"></h3>
+                                                <h6 class="text-muted">Chuyển đổi WIFI</h6>
+                                            </div>
+                                            <div class="ml-auto mt-md-3 mt-lg-0"> <span class="opacity-7 text-muted">
+                                                    <i class="fa-solid fa-retweet" style="font-size: 24px; " width="24"
+                                                        height="24" viewbox="0 0 24 24" fill="none" stroke="#009688"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                    </i>
+                                                    <line x1="12" y1="1" x2="12" y2="23"></line>
+                                                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6">
+                                                    </path>
+                                                    </svg>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row"></div>
+
+                    </div>
+                    <div class="col-xl-6 col-sm-8 col-12">
                         <div class="card board1 fill">
                             <div class="card-body">
-                                <div class="dash-widget-header">
-                                    <div>
-                                        <h3 class="card_widget_header" id="total-user">WIFI</h3>
-                                        <h6 class="text-muted">Connected</h6>
+                                <div class="wifi" id="WIFI1">
+                                    <h5 class="wifi-content">WIFI 1 <span class="wifi-status"></span></h5>
+                                    <div class="ssid">
+                                        <div class="ssid-content">SSID 1 </div>
+                                        <div class="ssid-value" id="SSID1"></div>
                                     </div>
-                                    <div class="ml-auto mt-md-3 mt-lg-0"> <i class="fa-solid fa-wifi"></i>
+                                    <div class="password">
+                                        <div class="password-conten">Password </div>
+                                        <div class="password-value" id="PASS1">
+                                        </div>
+                                        <span class="show-password">
+                                            <i class="fa-solid fa-eye-slash"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card-body">
+                                <div class="wifi" id="WIFI2">
+                                    <h5 class="wifi-content">WIFI 2 <div class="wifi-status"></div>
+                                    </h5>
+                                    <div class="ssid">
+                                        <div class="ssid-content">SSID 2 </div>
+                                        <div class="ssid-value" id="SSID2"></div>
+                                    </div>
+                                    <div class="password">
+                                        <div class="password-conten">Password </div>
+                                        <div class="password-value" id="PASS2">
+
+                                        </div>
+                                        <span class="show-password">
+                                            <i class="fa-solid fa-eye-slash"></i>
+                                        </span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
 
+                <div class="modal fade" id="modal_add_wifi" aria-hidden="true" role="dialog">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Thêm WIFI</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span
+                                        aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="form-add-wifi">
+                                    <div class="row form-row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <select class="form-select form-select-lg p-2">
+                                                    <option value="WIFI1" selected>WIFI 1</option>
+                                                    <option value="WIFI2">WIFI 2</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="form-label">SSID</label>
+                                                <input type="text" class="form-control" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="form-label">Password</label>
+                                                <input type="text" class="form-control" required>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <button type="submit" class="btn btn-block"
+                                        style="background-color: #1f2ad5; color: #fff">Cập nhật</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
             </div>
@@ -169,7 +307,9 @@
     <script src="./js/lib/popper.min.js"></script>
     <script src="./js/lib/bootstrap.min.js"></script>
     <script src="./js/src/script.js"></script>
+    <script type="text/javascript" src="./js/lib/toastify.min.js"></script>
     <script type="module" src="./js/src/firebase.js"></script>
+    <script type="module" src="./js/src/wifi.js"></script>
 
 </body>
 

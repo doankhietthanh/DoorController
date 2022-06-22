@@ -162,10 +162,10 @@
       $("body").addClass("mini-sidebar");
       $(".subdrop + ul").slideUp();
     }
-    setTimeout(function () {
-      mA.redraw();
-      mL.redraw();
-    }, 300);
+    // setTimeout(function () {
+    //   mA.redraw();
+    //   mL.redraw();
+    // }, 300);
     return false;
   });
   $(document).on("mouseover", function (e) {

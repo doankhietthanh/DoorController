@@ -4,9 +4,12 @@ import {
   set,
 } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js";
 import { auth, database } from "./firebase.js";
+import { init, logOut } from "./init.js";
+
+init();
+logOut();
 
 let listFingerID = [];
-let docs = [];
 
 onValue(ref(database, "finger/"), (snapshot) => {
   const data = snapshot.val();
@@ -14,6 +17,7 @@ onValue(ref(database, "finger/"), (snapshot) => {
 
   listFingerID.push(...listID);
 
+  let docs = [];
   listID.forEach((id) => {
     onValue(ref(database, `finger/${id}`), (snap) => {
       const doc = snap.val();
@@ -21,11 +25,9 @@ onValue(ref(database, "finger/"), (snapshot) => {
     });
   });
 
-  docs.sort((a, b) => a.timestamp - b.timestamp);
-  console.log(docs);
+  docs.sort((a, b) => b.timestamp - a.timestamp);
   document.getElementById("tbody-history").innerHTML = "";
   docs.forEach((doc, index) => {
-    console.log(doc);
     document.getElementById("tbody-history").innerHTML += `
       <tr>
         <td class="text-nowrap">

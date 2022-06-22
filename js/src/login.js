@@ -1,83 +1,70 @@
-import { auth } from "./firebase.js";
+// Import the functions you need from the SDKs you need
+import { auth, database } from "./firebase.js";
+import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.8.3/firebase-auth.js";
 import {
-  signInWithPopup,
-  GoogleAuthProvider,
-  signInWithEmailAndPassword,
-} from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+  ref,
+  update,
+} from "https://www.gstatic.com/firebasejs/9.8.3/firebase-database.js";
+import { Validator } from "../lib/validator.js";
 
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 
 //Login with email password
-$("#submit-login").addEventListener("click", (e) => {
-  e.preventDefault();
-
-  const email = $("#email-login").value;
-  const password = $("#password-login").value;
-
-  signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      const user = userCredential.user;
-      localStorage.setItem("user-token", JSON.stringify(user.accessToken));
-      nextPageSuccess();
-    })
-    .catch((error) => {
-      nextPageError();
-
-      $("#email-login").value = "";
-      $("#password-login").value = "";
-    });
+Validator({
+  form: "#form-login",
+  rules: [
+    Validator.isRequired("#email-login", "Vui lòng nhập Email"),
+    Validator.isEmail("#email-login"),
+    Validator.isRequired("#password-login", "Vui lòng nhập Mật khẩu"),
+    Validator.isPassword("#password-login"),
+  ],
+  onSubmit: function (data) {
+    signInWithEmailAndPassword(auth, data.email, data.password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        localStorage.setItem("user-token", JSON.stringify(user.accessToken));
+        const dt = new Date();
+        update(ref(database, "users/" + user.uid), {
+          last_login: dt,
+        });
+        nextPageSuccess("Đăng nhập thành công");
+      })
+      .catch((error) => {
+        nextPageError("Đăng nhập thất bại");
+      });
+  },
 });
 
-// Login with Google account
-const provider = new GoogleAuthProvider();
-$(".google").addEventListener("click", () => {
-  signInWithPopup(auth, provider)
-    .then((result) => {
-      const credential = GoogleAuthProvider.credentialFromResult(result);
-      const token = credential.accessToken;
-      const user = result.user;
-
-      nextPageSuccess();
-    })
-    .catch((error) => {
-      nextPageError();
-    });
-});
-
-document.querySelector(".lds-ring").style.display = "none";
-
-const nextPageSuccess = () => {
-  document.querySelector(".lds-ring").style.display = "block";
+export const nextPageSuccess = (text) => {
+  document.querySelector(".loading").style.display = "flex";
   Toastify({
-    text: "Đăng nhập thành công",
+    text: text,
     duration: 3000,
     close: true,
     gravity: "top",
     position: "right",
     stopOnFocus: true,
     style: {
-      background: "linear-gradient(to right, #00b09b, #96c93d)",
+      background: "#1890ff",
     },
-    onClick: function () {}, // Callback after click
   }).showToast();
-
   setTimeout(() => {
+    document.querySelector(".loading").style.display = "none";
     window.location.href = "/index.html";
   }, 3000);
 };
 
-const nextPageError = () => {
+export const nextPageError = (text) => {
   Toastify({
-    text: "Đăng nhập thất bại",
+    text: text,
     duration: 3000,
     close: true,
     gravity: "top",
     position: "right",
     stopOnFocus: true,
     style: {
-      background: "linear-gradient(to right, #cf1322, #820014)",
+      background: "#fa541c",
     },
-    onClick: function () {}, // Callback after click
   }).showToast();
 };

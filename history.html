@@ -7,9 +7,9 @@
     <title>SHIELD</title>
 
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/logo.png">
+    <link rel="stylesheet" type="text/css" href="./css/toastify.min.css">
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./css/lib.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
         integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -27,13 +27,16 @@
                 <a href="index.html" class="logo logo-small"> <img src="assets/img/logo.png" alt="Logo" width="30"
                         height="30"> </a>
             </div>
-            <a href="javascript:void(0);" id="toggle_btn"> <i class="fa-solid fa-align-justify"
-                    style="font-size:20px"></i> </a>
+
+            <a href="javascript:void(0);" id="toggle_btn">
+                <i class="fa-solid fa-align-justify" style="font-size:20px"></i>
+            </a>
             <a class="mobile_btn" id="mobile_btn"> <i class="fas fa-bars"></i> </a>
             <ul class="nav user-menu">
                 <li class="nav-item dropdown noti-dropdown">
-                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"> <i
-                            class="fa-regular fa-bell"></i>
+                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                        <i class="fa-regular fa-bell"></i>
+
                         <span class="badge badge-pill">1</span> </a>
                     <div class="dropdown-menu notifications">
                         <div class="topnav-dropdown-header"> <span class="notification-title">Thông báo</span>
@@ -44,14 +47,15 @@
                                 <li class="notification-message">
                                     <a href="#">
                                         <div class="media"> <span class="avatar avatar-sm">
-                                                <img class="avatar-img rounded-circle" alt="User Image"
-                                                    src="assets/img/profiles/avatar-01.png">
+                                                <img class="avatar-img rounded-circle avatarURL" alt="User Image"
+                                                    src="">
                                             </span>
                                             <div class="media-body">
-                                                <p class="noti-details"><span class="noti-title">Phong</span> vừa mới
+                                                <p class="noti-details"><span class="noti-title pfname"></span>
+                                                    vừa mới
                                                     <span class="noti-title">Đăng nhập vào hệ thống</span>
                                                 </p>
-                                                <p class="noti-time"><span class="notification-time">1 mins ago</span>
+                                                <p class="noti-time"><span class="notification-time">1 phút trước</span>
                                                 </p>
                                             </div>
                                         </div>
@@ -64,25 +68,24 @@
                 </li>
                 <li class="nav-item dropdown has-arrow">
                     <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"> <span class="user-img"><img
-                                class="rounded-circle" src="assets/img/profiles/avatar-01.png" width="31"
-                                alt="Soeng Souy"></span> </a>
+                                class="rounded-circle avatarURL" src="./" width="31" alt="User Image"></span> </a>
                     <div class="dropdown-menu">
                         <div class="user-header">
-                            <div class="avatar avatar-sm"> <img src="assets/img/profiles/avatar-01.png" alt="User Image"
-                                    class="avatar-img rounded-circle"> </div>
+                            <div class="avatar avatar-sm"> <img src="./" alt="User Image"
+                                    class="avatar-img rounded-circle avatarURL"> </div>
                             <div class="user-text">
-                                <h6>Phong</h6>
-                                <p class="text-muted mb-0">Quản trị viên</p>
+                                <h6 class="pfname"></h6>
+                                <p class="text-muted mb-0">Thành viên</p>
                             </div>
                         </div> <a class="dropdown-item" href="profile.html">Tài khoản</a>
                         <a class="dropdown-item" href="settings.html">Thiết lập</a>
-                        <a class="dropdown-item" href="login.html">Đăng xuất</a>
+                        <a id="logout" class="dropdown-item">Đăng xuất</a>
                     </div>
                 </li>
             </ul>
             <div class="top-nav-search">
                 <form>
-                    <input type="text" class="form-control" placeholder="Search here">
+                    <input type="text" class="form-control" placeholder="">
                     <button class="btn" type="submit"><i class="fas fa-search"></i></button>
                 </form>
             </div>

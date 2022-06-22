@@ -5207,7 +5207,7 @@ h3.page-sub-title {
     height: 100vh;
     position: fixed;
 
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.3);
@@ -5654,4 +5654,50 @@ h3.page-sub-title {
     .page-header .breadcrumb {
         display: none;
     }
+}
+
+/* WIFI */
+.wifi {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.ssid,
+.password {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.ssid-value {
+    margin-left: 20px;
+}
+
+.ssid-value,
+.password-value {
+    font-size: 18px;
+    font-weight: 600;
+    width: 120px;
+}
+
+.show-password i {
+    margin-left: 10px;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+}
+
+.wifi-content {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 20px;
+}
+
+.wifi-status.active {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #00c5fb;
 }

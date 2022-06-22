@@ -7,6 +7,10 @@ import {
   get,
 } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js";
 import { auth, database } from "./firebase.js";
+import { init, logOut } from "./init.js";
+
+init();
+logOut();
 
 let LIST_FINGER_ID = [];
 let TIME_CLOSE;

@@ -7,9 +7,9 @@
     <title>SHIELD</title>
 
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/logo.png">
+    <link rel="stylesheet" type="text/css" href="./css/toastify.min.css">
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./css/lib.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
         integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -18,6 +18,13 @@
 </head>
 
 <body>
+    <div class="loading">
+        <div class="lds-facebook">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
     <div class="main-wrapper">
         <div class="header">
             <div class="header-left">
@@ -46,11 +53,12 @@
                                 <li class="notification-message">
                                     <a href="#">
                                         <div class="media"> <span class="avatar avatar-sm">
-                                                <img class="avatar-img rounded-circle" alt="User Image"
-                                                    src="assets/img/profiles/avatar-01.png">
+                                                <img class="avatar-img rounded-circle avatarURL" alt="User Image"
+                                                    src="">
                                             </span>
                                             <div class="media-body">
-                                                <p class="noti-details"><span class="noti-title">Phong</span> vừa mới
+                                                <p class="noti-details"><span class="noti-title pfname"></span>
+                                                    vừa mới
                                                     <span class="noti-title">Đăng nhập vào hệ thống</span>
                                                 </p>
                                                 <p class="noti-time"><span class="notification-time">1 phút trước</span>
@@ -66,19 +74,18 @@
                 </li>
                 <li class="nav-item dropdown has-arrow">
                     <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"> <span class="user-img"><img
-                                class="rounded-circle" src="./assets/img/profiles/avatar-01.png" width="31"
-                                alt="User Image"></span> </a>
+                                class="rounded-circle avatarURL" src="./" width="31" alt="User Image"></span> </a>
                     <div class="dropdown-menu">
                         <div class="user-header">
-                            <div class="avatar avatar-sm"> <img src="./assets/img/profiles/avatar-01.png"
-                                    alt="User Image" class="avatar-img rounded-circle"> </div>
+                            <div class="avatar avatar-sm"> <img src="./" alt="User Image"
+                                    class="avatar-img rounded-circle avatarURL"> </div>
                             <div class="user-text">
-                                <h6>Thanh</h6>
-                                <p class="text-muted mb-0">Quản trị viên</p>
+                                <h6 class="pfname"></h6>
+                                <p class="text-muted mb-0">Thành viên</p>
                             </div>
                         </div> <a class="dropdown-item" href="profile.html">Tài khoản</a>
                         <a class="dropdown-item" href="settings.html">Thiết lập</a>
-                        <a class="dropdown-item" href="login.html">Đăng xuất</a>
+                        <a id="logout" class="dropdown-item">Đăng xuất</a>
                     </div>
                 </li>
             </ul>
@@ -134,7 +141,7 @@
                 <div class="page-header">
                     <div class="row">
                         <div class="col-sm-12 mt-5">
-                            <h3 class="page-title mt-3">Xin chào Phong!</h3>
+                            <h3 class="page-title mt-3"> Xin chào <span class="pfname"></span>!</h3>
                             <ul class="breadcrumb">
                                 <li class="breadcrumb-item active">Dashboard</li>
                             </ul>
@@ -258,6 +265,7 @@
     <script src="./js/lib/bootstrap.min.js"></script>
     <script src="./js/src/script.js"></script>
     <script type="module" src="./js/src/firebase.js"></script>
+    <script type="module" src="./js/src/login.js"></script>
     <script type="module" src="./js/src/dashboard.js"></script>
 
 </body>
